@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //a. Get all the countries from the Asia continent/region using the Filter function
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://restcountries.com/v3.1/all', true);
+xhr.onload = function() {
+    const data = JSON.parse(this.responseText);
+    const asiaCountries = data.filter(country => country.region === 'Asia');
+    console.log(asiaCountries);
+ 
+  };
+xhr.send();
+
+// //b. Get all the countries with a population below 2 lakhs using the Filter function
+let xhr= new XMLHttpRequest();
+xhr.open("GET","https://restcountries.com/v3.1/all",true);
+xhr.onload= function(){
+  let data=JSON.parse(this.responseText)
+  let lessThenPopulation=data.filter(Data=>Data.population<200000)
+  let countpop=lessThenPopulation.map(cp=>console.log(`countries : ${cp.name.common} => population: ${cp.population}`))
+};
+xhr.send();
+// // c.Using the forEach function, print the following details: name, capital, flag
+
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function() {
+  let data = JSON.parse(this.responseText);
+  data.forEach(details => {
+    console.log(`Name: ${details.name.common}, Capital: ${details.capital}, Flag: ${details.flags.svg}`);
+  });
+};
+xhr.send();
+// d.Using the reduce function, print the total population of countries
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function() {
+  let data = JSON.parse(this.responseText);
+ 
+  let totalpopulation=data.reduce((a,details) => {return a + Number(details.population)},0)
+  console.log(`Total population: ${totalpopulation}`)
+};
+xhr.send();
+
+// e.Print the country which uses US Dollars as currency.
+
+
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function() {
+  let data = JSON.parse(this.responseText);
+  let usdCountries = data.filter((country) =>  country.currencies);
+  console.log(usdCountries.filter(country => country.currencies.USD).map(country => country.name.common));
+};
+xhr.send();
+
+</script>
+
+  
+</body>
+</html>
