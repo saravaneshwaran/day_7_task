@@ -46,6 +46,7 @@ xhr.onload = function() {
   let data = JSON.parse(this.responseText);
  
   let totalpopulation=data.reduce((a,details) => {return a + Number(details.population)},0)
+  //let totalpopulation=data.reduce((a,b) =>  a + b.population,0)   --> use this
   console.log(`Total population: ${totalpopulation}`)
 };
 xhr.send();
